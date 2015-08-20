@@ -1,5 +1,5 @@
 import React from 'react/addons';
-import Cart from './Cart';
+import Results from './Results';
 
 import config from '../../../config/app';
 
@@ -30,7 +30,7 @@ class AppRoot extends React.Component {
   render () {
     return <div className="appRoot">
       <h1>{config.title}</h1>
-      <Cart cart={this.props.state.cart} />
+      <Results courses={this.props.state.courses} />
     </div>;
   }
 }
