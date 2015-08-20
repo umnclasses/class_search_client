@@ -1,5 +1,5 @@
 var config = {};
 
-config.title = 'My React App';
+config.title = 'UMN Course Search';
 
 module.exports = config;
