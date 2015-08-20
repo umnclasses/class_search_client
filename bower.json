@@ -1,0 +1,26 @@
+{
+  "name": "class-search-client",
+  "description": "Front End to search the course.umn.edu API",
+  "dependencies": {
+    "react": "~0.13.3"
+  },
+  "moduleType": [
+    "amd",
+    "globals",
+    "node"
+  ],
+  "keywords": [
+    "motion",
+    "physics",
+    "particles"
+  ],
+  "authors": [],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
