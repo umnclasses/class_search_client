@@ -1,5 +1,6 @@
 import React from 'react/addons';
 import Results from './Results';
+import SearchForm from './SearchForm'
 
 import config from '../../../config/app';
 
@@ -30,7 +31,10 @@ class AppRoot extends React.Component {
   render () {
     return <div className="appRoot">
       <h1>{config.title}</h1>
-      <Results courses={this.props.state.courses} />
+      <div className="row">
+        <div className="col-md-4"><SearchForm /></div>
+        <div className="col-md-8"><Results courses={this.props.state.courses} /></div>
+      </div>
     </div>;
   }
 }
