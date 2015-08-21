@@ -1,5 +1,6 @@
 import React from 'react/addons';
 import SingleSelect from './SingleSelect';
+import Results from './Results';
 
 import config from '../../../config/app';
 
@@ -11,7 +12,7 @@ class SearchForm extends React.Component {
 
   constructor(props) {
     super(props);
-    this.state = { campuses: [], terms: [], subjects: [], formVisible: false };
+    this.state = { campuses: [], terms: [], subjects: [], courses: [], formVisible: false };
   }
 
   /*
@@ -79,19 +80,30 @@ class SearchForm extends React.Component {
       return {"sterm": term.strm, "label": this.decodeTerm(term.strm)};
     }.bind(this))
 
-    return <div className="searchform">
-      <form onSubmit={ this.executeSearch() }>
-        <div className="form-inline">
-          <div className="form-group">
-            <SingleSelect ref="campusSelect" collection={ this.state.campuses } selectHandler={this.revealFormHandler.bind(this)} selectLabel="abbreviation" selectValue="abbreviation"/>
+    return (
+      <div className="appRoot">
+        <h1>{config.title}</h1>
+        <div className="row">
+          <div className="col-md-4">
+            <div className="searchform">
+              <form onSubmit={ this.executeSearch() }>
+                <div className="form-inline">
+                  <div className="form-group">
+                    <SingleSelect ref="campusSelect" collection={ this.state.campuses } selectHandler={this.revealFormHandler.bind(this)} selectLabel="abbreviation" selectValue="abbreviation"/>
+                  </div>
+                  <div className="form-group">
+                    <SingleSelect ref="termSelect" collection={ terms } selectHandler={this.revealFormHandler.bind(this)} selectLabel="label" selectValue="sterm" />
+                  </div>
+                </div>
+                {this.fullForm()}
+              </form>
+            </div>
           </div>
-          <div className="form-group">
-            <SingleSelect ref="termSelect" collection={ terms } selectHandler={this.revealFormHandler.bind(this)} selectLabel="label" selectValue="sterm" />
-          </div>
+          <div className="col-md-8">
+            <Results courses={this.state.courses} /></div>
         </div>
-        {this.fullForm()}
-      </form>
-    </div>;
+      </div>
+    );
   }
 }
 

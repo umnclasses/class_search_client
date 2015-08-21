@@ -29,13 +29,17 @@ class AppRoot extends React.Component {
    * @returns {JSX}
    */
   render () {
-    return <div className="appRoot">
-      <h1>{config.title}</h1>
-      <div className="row">
-        <div className="col-md-4"><SearchForm /></div>
-        <div className="col-md-8"><Results courses={this.props.state.courses} /></div>
-      </div>
-    </div>;
+    // return <div className="appRoot">
+    //   <h1>{config.title}</h1>
+    //   <div className="row">
+    //     <div className="col-md-4"><SearchForm /></div>
+    //     <div className="col-md-8"><Results courses={this.props.state.courses} /></div>
+    //   </div>
+    // </div>;
+    // TODO: Remove after CCF demo
+    return (
+      <SearchForm />
+    );
   }
 }
 
