@@ -11,7 +11,7 @@ class SearchForm extends React.Component {
 
   constructor(props) {
     super(props);
-    this.state = { campuses: [], terms: [], formVisible: false };
+    this.state = { campuses: [], terms: [], subjects: [], formVisible: false };
   }
 
   /*
@@ -38,14 +38,33 @@ class SearchForm extends React.Component {
     return `${ term } 20${ year }`;
   }
 
+  getSubjects() {
+    return this.fetch(`campuses/${this.refs.campusSelect.state.selectValue}/terms/${this.refs.termSelect.state.selectValue}/subjects.json`).then(function(response) {
+      var subjects = response.subjects.map(function(subject) {
+        return {"subject_id": subject.subject_id, "label": `${subject.subject_id} - ${subject.description}`}
+      });
+
+      this.setState({subjects: subjects});
+    }.bind(this));
+  }
+
   revealFormHandler() {
     var campus = this.refs.campusSelect.state.selectValue;
     var term = this.refs.termSelect.state.selectValue;
 
     if (campus != "" && term != "") {
+      this.getSubjects();
       this.setState({formVisible: true});
     } else {
       this.setState({formVisible: false});
+    }
+  }
+
+  fullForm() {
+    if (this.state.formVisible) {
+      return (
+        <SingleSelect ref="subjectSelect" collection={ this.state.subjects } selectHandler={function(){}} selectLabel="label" selectValue="subject_id" />
+      );
     }
   }
 
@@ -56,14 +75,6 @@ class SearchForm extends React.Component {
    * @returns {JSX}
    */
   render () {
-    var fullForm;
-
-    if (this.state.formVisible) {
-      fullForm = (
-        <p>See me</p>
-      );
-    }
-
     var terms = this.state.terms.map(function(term) {
       return {"sterm": term.strm, "label": this.decodeTerm(term.strm)};
     }.bind(this))
@@ -78,7 +89,7 @@ class SearchForm extends React.Component {
             <SingleSelect ref="termSelect" collection={ terms } selectHandler={this.revealFormHandler.bind(this)} selectLabel="label" selectValue="sterm" />
           </div>
         </div>
-        {fullForm}
+        {this.fullForm()}
       </form>
     </div>;
   }
