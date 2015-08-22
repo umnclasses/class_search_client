@@ -29,8 +29,8 @@ class MeetingTime extends React.Component {
 
 // Prop types validation
 MeetingTime.propTypes = {
-  startTime: React.PropTypes.object.isRequired,
-  endTime: React.PropTypes.object.isRequired
+  startTime: React.PropTypes.string.isRequired,
+  endTime: React.PropTypes.string.isRequired
 };
 
 export default MeetingTime;
