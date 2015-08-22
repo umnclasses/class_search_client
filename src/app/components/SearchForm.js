@@ -64,12 +64,22 @@ class SearchForm extends React.Component {
   fullForm() {
     if (this.state.formVisible) {
       return (
-        <SingleSelect ref="subjectSelect" collection={ this.state.subjects } selectHandler={function(){}} selectLabel="label" selectValue="subject_id" />
+        <div>
+          <SingleSelect ref="subjectSelect" label="Subject:" collection={ this.state.subjects } selectHandler={function(){}} selectLabel="label" selectValue="subject_id" />
+          <div className="form-group">
+            <button type="submit" className="btn btn-primary">Search</button>
+          </div>
+        </div>
       );
     }
   }
 
-  executeSearch() {}
+  executeSearch(e) {
+    e.preventDefault();
+    this.fetch(`campuses/${this.refs.campusSelect.state.selectValue}/terms/${this.refs.termSelect.state.selectValue}/classes.json?q=subject_id=${this.refs.subjectSelect.state.selectValue}`).then(function(response) {
+      this.setState({courses: response.courses});
+    }.bind(this));
+  }
 
   /*
    * @method render
@@ -81,18 +91,18 @@ class SearchForm extends React.Component {
     }.bind(this))
 
     return (
-      <div className="appRoot">
+      <div className="appRoot container">
         <h1>{config.title}</h1>
         <div className="row">
           <div className="col-md-4">
             <div className="searchform">
-              <form onSubmit={ this.executeSearch() }>
-                <div className="form-inline">
-                  <div className="form-group">
-                    <SingleSelect ref="campusSelect" collection={ this.state.campuses } selectHandler={this.revealFormHandler.bind(this)} selectLabel="abbreviation" selectValue="abbreviation"/>
+              <form onSubmit={ this.executeSearch.bind(this) }>
+                <div className="row">
+                  <div className="col-lg-6">
+                    <SingleSelect ref="campusSelect" label="Campus:" collection={ this.state.campuses } selectHandler={this.revealFormHandler.bind(this)} selectLabel="abbreviation" selectValue="abbreviation"/>
                   </div>
-                  <div className="form-group">
-                    <SingleSelect ref="termSelect" collection={ terms } selectHandler={this.revealFormHandler.bind(this)} selectLabel="label" selectValue="sterm" />
+                  <div className="col-lg-6">
+                    <SingleSelect ref="termSelect" label="Term:" collection={ terms } selectHandler={this.revealFormHandler.bind(this)} selectLabel="label" selectValue="sterm" />
                   </div>
                 </div>
                 {this.fullForm()}
@@ -100,7 +110,8 @@ class SearchForm extends React.Component {
             </div>
           </div>
           <div className="col-md-8">
-            <Results courses={this.state.courses} /></div>
+            <Results courses={this.state.courses} />
+          </div>
         </div>
       </div>
     );
