@@ -22,14 +22,16 @@ class Course extends React.Component {
   render () {
     var sections = this.props.course.sections.map(function(section) {
       return (
-        <Section section={section} />
+        <Section key={section.id} section={section} />
       )
     });
 
     return (
       <div className="panel panel-default">
         <div className="panel-heading">
-          <h3 class="panel-title">{this.props.course.title}</h3>
+          <h3 className="panel-title">
+            {this.props.course.subject.subject_id} {this.props.course.catalog_number} - {this.props.course.title}
+          </h3>
           <p>{this.props.course.description}</p>
         </div>
         <ul className="list-group">
