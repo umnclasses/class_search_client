@@ -22,21 +22,25 @@ class Results extends React.Component {
   render () {
     var courses = this.props.courses.map(function(course) {
       return (
-        <Course course={course} />
+        <Course key={course.id} course={course} />
       )
     });
 
-    return <div className="results">
-      <ul>
-      {courses}
-      </ul>
-    </div>;
+    return(
+      <div className="results">
+        <h2>{courses.length} Results</h2>
+        <hr />
+        <ul className="list-unstyled">
+          {courses}
+        </ul>
+      </div>
+    );
   }
 }
 
 // Prop types validation
 Results.propTypes = {
-  courses: React.PropTypes.object.isRequired,
+  courses: React.PropTypes.array.isRequired,
 };
 
 export default Results;
