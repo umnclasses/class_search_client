@@ -10,7 +10,7 @@ class MeetingTime extends React.Component {
     return React.addons.PureRenderMixin.shouldComponentUpdate.apply(this, arguments);
   }
 
-  timeToTwelveHour(time) {
+  getTimeToTwelveHour(time) {
     var newTime = time.split(":");
 
     var suffix = newTime[0] > 12 ? ' PM' : ' AM';
@@ -21,7 +21,7 @@ class MeetingTime extends React.Component {
 
   render() {
     return (
-        <span>{this.timeToTwelveHour(this.props.startTime)} - {this.timeToTwelveHour(this.props.endTime)}</span>
+        <span>{this.getTimeToTwelveHour(this.props.startTime)} - {this.getTimeToTwelveHour(this.props.endTime)}</span>
     );
   }
 

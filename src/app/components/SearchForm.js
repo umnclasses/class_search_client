@@ -61,7 +61,7 @@ class SearchForm extends React.Component {
     }
   }
 
-  fullForm() {
+  getFullForm() {
     if (this.state.formVisible) {
       return (
         <div>
@@ -105,7 +105,7 @@ class SearchForm extends React.Component {
                     <SingleSelect ref="termSelect" label="Term:" collection={ terms } selectHandler={this.revealFormHandler.bind(this)} selectLabel="label" selectValue="sterm" />
                   </div>
                 </div>
-                {this.fullForm()}
+                {this.getFullForm()}
               </form>
             </div>
           </div>
