@@ -11,7 +11,7 @@ class MeetingPattern extends React.Component {
     return React.addons.PureRenderMixin.shouldComponentUpdate.apply(this, arguments);
   }
 
-  assembleDays() {
+  getFormattedDays() {
     var days = this.props.meetingPattern.days.map(function(day) {
         return day.abbreviation.toUpperCase();
     });
@@ -19,15 +19,24 @@ class MeetingPattern extends React.Component {
     return days.join(" ") + " ";
   }
 
+  getMeetingTime() {
+    if (this.props.meetingPattern.start_time != null && this.props.meetingPattern.end_time != null) {
+      return (
+        <MeetingTime
+          startTime={this.props.meetingPattern.start_time}
+          endTime={this.props.meetingPattern.end_time}
+        />
+      );
+    }
+    return null;
+  }
+
   render() {
     return (
-        <dd>
-            {this.assembleDays()}
-            <MeetingTime
-                startTime={this.props.meetingPattern.start_time}
-                endTime={this.props.meetingPattern.end_time}
-            /> in {this.props.meetingPattern.location.description}
-        </dd>
+      <dd>
+        {this.getFormattedDays()}
+        {this.getMeetingTime()}
+      </dd>
     );
   }
 }
