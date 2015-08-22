@@ -40,7 +40,8 @@ class SearchForm extends React.Component {
   }
 
   getSubjects() {
-    return this.fetch(`campuses/${this.refs.campusSelect.state.selectValue}/terms/${this.refs.termSelect.state.selectValue}/subjects.json`).then(function(response) {
+    var queryString = `campuses/${this.refs.campusSelect.state.selectValue}/terms/${this.refs.termSelect.state.selectValue}/subjects.json`;
+    return this.fetch(queryString).then(function(response) {
       var subjects = response.subjects.map(function(subject) {
         return {"subject_id": subject.subject_id, "label": `${subject.subject_id} - ${subject.description}`}
       });
@@ -65,7 +66,14 @@ class SearchForm extends React.Component {
     if (this.state.formVisible) {
       return (
         <div>
-          <SingleSelect ref="subjectSelect" label="Subject:" collection={ this.state.subjects } selectHandler={function(){}} selectLabel="label" selectValue="subject_id" />
+          <SingleSelect
+            ref="subjectSelect"
+            label="Subject:"
+            collection={this.state.subjects}
+            selectHandler={function(){}}
+            selectLabel="label"
+            selectValue="subject_id"
+          />
           <div className="form-group">
             <button type="submit" className="btn btn-primary">Search</button>
           </div>
@@ -76,7 +84,8 @@ class SearchForm extends React.Component {
 
   executeSearch(e) {
     e.preventDefault();
-    this.fetch(`campuses/${this.refs.campusSelect.state.selectValue}/terms/${this.refs.termSelect.state.selectValue}/classes.json?q=subject_id=${this.refs.subjectSelect.state.selectValue}`).then(function(response) {
+    var queryString = `campuses/${this.refs.campusSelect.state.selectValue}/terms/${this.refs.termSelect.state.selectValue}/classes.json?q=subject_id=${this.refs.subjectSelect.state.selectValue}`;
+    this.fetch(queryString).then(function(response) {
       this.setState({courses: response.courses});
     }.bind(this));
   }
@@ -99,10 +108,24 @@ class SearchForm extends React.Component {
               <form onSubmit={ this.executeSearch.bind(this) }>
                 <div className="row">
                   <div className="col-lg-6">
-                    <SingleSelect ref="campusSelect" label="Campus:" collection={ this.state.campuses } selectHandler={this.revealFormHandler.bind(this)} selectLabel="abbreviation" selectValue="abbreviation"/>
+                    <SingleSelect
+                      ref="campusSelect"
+                      label="Campus:"
+                      collection={this.state.campuses}
+                      selectHandler={this.revealFormHandler.bind(this)}
+                      selectLabel="abbreviation"
+                      selectValue="abbreviation"
+                    />
                   </div>
                   <div className="col-lg-6">
-                    <SingleSelect ref="termSelect" label="Term:" collection={ terms } selectHandler={this.revealFormHandler.bind(this)} selectLabel="label" selectValue="sterm" />
+                    <SingleSelect
+                      ref="termSelect"
+                      label="Term:"
+                      collection={terms}
+                      selectHandler={this.revealFormHandler.bind(this)}
+                      selectLabel="label"
+                      selectValue="sterm"
+                    />
                   </div>
                 </div>
                 {this.getFullForm()}
