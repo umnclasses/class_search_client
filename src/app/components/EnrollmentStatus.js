@@ -17,13 +17,13 @@ class EnrollmentStatus extends React.Component {
   }
 
   getCountClass(enrollment) {
-    var fillPerecent = enrollment.enrollment_total / enrollment.enrollment_capacity;
+    var fillPercent = enrollment.enrollment_total / enrollment.enrollment_capacity;
 
-    if (fillPerecent >= 0.8 && fillPerecent < 0.9) {
+    if (fillPercent >= 0.8 && fillPercent < 0.9) {
       return 'label label-default text-warning';
     }
 
-    if (fillPerecent >= 0.9) {
+    if (fillPercent >= 0.9) {
       return 'label label-default text-danger';
     }
 
