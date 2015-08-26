@@ -29,10 +29,10 @@ class EnrollmentStatus extends React.Component {
   render() {
     return (
       <div className="label-group h4">
-        <span className={getStatusClass(this.props.enrollment.status)}>
+        <span className={this.getStatusClass(this.props.enrollment.status)}>
           {status}
         </span>
-        <span className={getCountClass(this.props.enrollment)}>
+        <span className={this.getCountClass(this.props.enrollment)}>
           {this.props.enrollment.enrollment_total}/{this.props.enrollment.enrollment_capacity}
         </span>
       </div>
