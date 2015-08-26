@@ -3,6 +3,8 @@ import React from 'react/addons';
 class EnrollmentStatus extends React.Component {
 
   getStatusClass(status) {
+    if (!status || status === "") return "label label-default";
+
     var labelClasses = {
       open: 'label label-success text-capitalize',
       closed: 'label label-danger text-capitalize',
