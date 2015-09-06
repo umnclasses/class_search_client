@@ -10,6 +10,11 @@ import config from '../../../config/app';
  */
 class AppRoot extends React.Component {
 
+  constructor(props) {
+    super(props);
+    this.state = {"courses": []};
+  }
+
   /*
    * AppRootly PureRenderMixin
    *
@@ -24,21 +29,23 @@ class AppRoot extends React.Component {
     return React.addons.PureRenderMixin.shouldComponentUpdate.apply(this, arguments);
   }
 
+  searchHandler(courses) {
+    this.setState({courses: courses});
+  }
+
   /*
    * @method render
    * @returns {JSX}
    */
   render () {
-    // return <div className="appRoot">
-    //   <h1>{config.title}</h1>
-    //   <div className="row">
-    //     <div className="col-md-4"><SearchForm /></div>
-    //     <div className="col-md-8"><Results courses={this.props.state.courses} /></div>
-    //   </div>
-    // </div>;
-    // TODO: Remove after CCF demo
-    return (
-      <SearchForm />
+    return(
+      <div className="appRoot container">
+        <h1>{config.title}</h1>
+        <div className="row">
+          <div className="col-md-4"><SearchForm searchHandler={this.searchHandler.bind(this)} /></div>
+          <div className="col-md-8"><Results courses={this.state.courses} /></div>
+        </div>
+      </div>
     );
   }
 }

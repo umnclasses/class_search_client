@@ -1,18 +1,3 @@
-
-.appRoot {
-  border: 2px solid blue;
-  padding: 10px;
-}
-
-.cart {
-  border: 2px solid red;
-  padding: 10px;
-}
-.item {
-  border: 2px solid green;
-  padding: 10px;
-}
-
 ul {
   list-style: none;
   padding: 0;
@@ -20,4 +5,18 @@ ul {
 
 li {
   margin: 5px 0 5px 0;
+}
+
+.label-group .label {
+  border-radius: 0;
+}
+
+.label-group .label:first-child {
+  border-top-left-radius: .25em;
+  border-bottom-left-radius: .25em;
+}
+
+.label-group .label:last-child {
+  border-top-right-radius: .25em;
+  border-bottom-right-radius: .25em;
 }

@@ -15,6 +15,10 @@ class Course extends React.Component {
     return React.addons.PureRenderMixin.shouldComponentUpdate.apply(this, arguments);
   }
 
+  getCourseTitle() {
+    return `${this.props.course.subject.subject_id} ${this.props.course.catalog_number} - ${this.props.course.title}`;
+  }
+
   /*
    * @method render
    * @returns {JSX}
@@ -30,7 +34,7 @@ class Course extends React.Component {
       <div className="panel panel-default">
         <div className="panel-heading">
           <h3 className="panel-title">
-            {this.props.course.subject.subject_id} {this.props.course.catalog_number} - {this.props.course.title}
+            {this.getCourseTitle()}
           </h3>
           <p>{this.props.course.description}</p>
         </div>
